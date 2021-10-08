@@ -11,10 +11,15 @@ import java.nio.file.Paths
 @Singleton
 class CsvService {
 
-    fun generateFileCSV(nameFile: String, client: Client) {
+    fun generateFileCSV(nameFile: String, clientList: List<Client>) {
         val writer = Files.newBufferedWriter(Paths.get(CSV_File_Path(nameFile)))
         val csvPrinter = CSVPrinter(writer, CSVFormat.DEFAULT)
-        csvPrinter.printRecord(client.cpf, client.firstName, client.lastName, client.transactionAmount.toString())
+
+        for (client in clientList) {
+            csvPrinter.printRecord(
+                client.cpf, client.firstName, client.lastName, client.transactionAmount.toString()
+            )
+        }
         csvPrinter.flush()
         csvPrinter.close()
     }

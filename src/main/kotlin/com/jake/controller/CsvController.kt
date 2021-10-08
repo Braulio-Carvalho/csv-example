@@ -14,7 +14,7 @@ import io.micronaut.http.annotation.Post
 class CsvController(private val csvService: CsvService) {
 
     @Post("{name}")
-    fun generateFileCSV(@PathVariable name: String, @Body client: Client): HttpResponse<Any> {
+    fun generateFileCSV(@PathVariable name: String, @Body client: List<Client>): HttpResponse<Any> {
         return HttpResponse.created(csvService.generateFileCSV(name, client))
     }
 
